@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.postgres.fields import ArrayField
+
 
 
 class MyAccountManager(BaseUserManager):
@@ -37,9 +39,12 @@ class MyAccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser):
     first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50, blank=True)
     email = models.EmailField(max_length=100, unique=True)
     username = models.CharField(max_length=50, unique=True)
+    # phone = models.CharField(max_length=30, blank=True)
+    # role = models.CharField(max_length=55)
+    # address = ArrayField(models.JSONField(), null=True)
     date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
